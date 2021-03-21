@@ -1,0 +1,61 @@
+enum versions [v1, apps/v1 ]
+
+prototype Resource {
+    apiVersion: $version
+    > Версия ресурса
+    kind: String
+    > Тип ресурса
+    metadata: {}
+    >> Любые данные в виде метаинформации. Может использовать как самим k8s,
+    так и как ссылки при описании ресурса.
+    Например:
+    <<
+}
+
+config Namespace < $Resource {
+    >>
+        Kubernetes поддерживает несколько виртуальных кластеров в одном физическом кластере.
+        Такие виртуальные кластеры называются пространствами имён.
+
+        Подробнее документацию можно почитать на https://kubernetes
+       .io/ru/docs/concepts/overview/working-with-objects/namespaces/.
+    <<
+    apiVersion = v1
+    kind = Namespace
+    metadata = {
+        name: string 
+        > имя текущего namespace
+    }
+}
+
+config Deployments < $Resource {
+    >>
+        Deployment – это базовая сущность для разворачивания контейнера внутри приложения.
+        Deployment привязан к $Namespace. Если Namespace не указан, то будет использоваться
+        default namespace
+    <<
+    apiVersion = apps/v1
+    kind = Deployment
+    metadata = {
+        name: string?
+        > Имя для текущего deploy
+        labels: List<String, String>?
+        > Список меток для этого деплоя, по которым его будет удобно искать
+    }
+
+    spec
+
+}
+
+
+location /idm-controller {
+  limit_except GET POST PUT OPTIONS DELETE {
+    allow all;
+  }
+  proxy_set_header Host idm-controller-preview.raiffeisen.ru;
+  proxy_set_header X-Forwaded-proto $remote_addr;
+  proxy_set_header X-Forwaded-For "https";
+  proxy_pass https://idm-controller-preview.raiffeisen.ru;
+  proxy_pass_request_headers on;
+  proxy_http_version 1.1;
+}

@@ -18,14 +18,12 @@ object DeploymentPage : Page {
     override fun Container.render() {
         bsContainer {
             bsCard {
-                body {
-                    title {
-                        content = Messages.Pages.Deployment.title.tr()
-                    }
-                    text {
-                        rich = true
-                        content = Messages.Pages.Deployment.description.tr()
-                    }
+                title {
+                    content = Messages.Pages.Deployment.title.tr()
+                }
+                text {
+                    rich = true
+                    content = Messages.Pages.Deployment.description.tr()
                 }
             }
         }

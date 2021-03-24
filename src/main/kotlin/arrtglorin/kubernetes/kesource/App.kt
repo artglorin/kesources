@@ -1,11 +1,11 @@
 package arrtglorin.kubernetes.kesource
 
-import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap
-import arrtglorin.kubernetes.kesource.bottstrap.bs
 import arrtglorin.kubernetes.kesource.components.appHeader
 import arrtglorin.kubernetes.kesource.components.resourceList
 import io.kvision.Application
 import io.kvision.core.Container
+import io.kvision.core.onEvent
+import io.kvision.form.select.simpleSelect
 import io.kvision.html.div
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
@@ -34,70 +34,33 @@ class App : Application() {
             )
 
         root("kvapp") {
-            div() {
-                bs {
-                    container { fluid = true }
-                }
+            div {
+                design("root")
                 appHeader()
-                div(classes = setOf("row", "gx-3")) {
-                    bs {
-                        row {
-                            gx(3)
-                        }
-                    }
-                    div(classes = setOf("col-2")) {
-                        bs {
-                            col(2)
-                            border {
-                                right = true
-                                color(info)
-                            }
-                        }
-                        addCssClass(Bootstrap.Border.right.name)
-                        addCssClass(Bootstrap.Border.Color.info.name)
+                div {
+                    design("center.nav.root")
+                    div {
+                        design("center.nav.resourceList")
                         resourceList()
                     }
-                    div(classes = setOf("col-10")) {
-                        bs {
-                            col(10) {}
-                        }
+                    div {
+                        design("center.content")
                         pageContainer = this
                     }
 
                 }
+                div{
+                    design("footer.div")
+                    simpleSelect(listOf("en" to "English", "ru" to "Russian"), I18n.language) {
+                        onEvent {
+                            change = {
+                                I18n.language = self.value ?: "en"
+                            }
+                        }
+                    }
+                }
+
             }
-
-//            dockPanel(classes = Bootstrap { +container; +m3 }) {
-////                up {
-////                }
-////                left {
-////                }
-////                center {
-//////                    flexPanel(
-//////                        FlexDirection.ROW,
-//////                        FlexWrap.WRAP,
-//////                        JustifyContent.FLEXSTART,
-//////                        AlignItems.CENTER,
-//////                        spacing = 5
-//////                    ) {
-////
-//////                    }
-////                    height = 100.perc
-////                    width = 100.perc
-////                }
-////                down {
-////                    position = Position.ABSOLUTE
-////                    simpleSelect(listOf("en" to "English", "ru" to "Russian"), I18n.language) {
-////                        onEvent {
-////                            change = {
-////                                I18n.language = self.value ?: "en"
-////                            }
-////                        }
-////                    }
-////                }
-//            }
-
-
         }
         initRouting()
     }

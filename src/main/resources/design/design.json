@@ -1,0 +1,42 @@
+{
+  "card": {
+    "root" : ["card"],
+    "body" : ["card-body"],
+    "title" : ["card-title"],
+    "text" : ["card-text"]
+  },
+  "pages": {
+    "root" : {
+      "div" : ["py-3"],
+      "card" : [""]
+    }
+  },
+  "footer": {
+    "div": ["container-fluid"]
+  },
+  "root": ["container-fluid"],
+  "center": {
+    "nav": {
+      "root" : ["row", "gx-3"],
+      "resourceList": ["col-2","border-right", "border-info"]
+    },
+    "content" : ["col"]
+  },
+  "header": {
+    "root": [
+      "navbar",
+      "navbar-dark",
+      "bg-primary",
+      "navbar-expand-xl",
+      "row"
+    ],
+    "div": [
+      "container-fluid"
+    ],
+    "link": {
+      "home": [
+        "navbar-brand"
+      ]
+    }
+  }
+}

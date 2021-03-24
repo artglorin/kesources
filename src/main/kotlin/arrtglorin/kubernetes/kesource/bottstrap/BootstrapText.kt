@@ -1,16 +1,11 @@
 package arrtglorin.kubernetes.kesource.bottstrap
 
 import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.card
-import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.cardBody
-import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.cardText
-import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.cardTitle
 import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.h2
 import arrtglorin.kubernetes.kesource.bottstrap.Bootstrap.textPrimary
+import arrtglorin.kubernetes.kesource.design
 import io.kvision.core.Container
-import io.kvision.html.Div
-import io.kvision.html.H5
-import io.kvision.html.P
-import io.kvision.html.p
+import io.kvision.html.*
 
 
 fun Container.bsTitle(f: P.() -> Unit) {
@@ -29,20 +24,19 @@ fun Container.bsCard(f: Card.() -> Unit) {
     add(Card().apply(f))
 }
 
-class Card : Div(classes = Bootstrap { +card }) {
+class Card : Div() {
+    val body = div { design("card.body") }
 
-    fun body(f: CardBody.() -> Unit) {
-        add(CardBody().apply(f))
+    init {
+        design("card.root")
+        add(body)
     }
 
-    inner class CardBody : Div(classes = Bootstrap { +cardBody }) {
+    fun title(f: H5.() -> Unit) {
+        body.add(H5 { design("card.title"); f() })
+    }
 
-        fun title(f: H5.() -> Unit) {
-            add(H5(classes = Bootstrap { +cardTitle }).apply(f))
-        }
-
-        fun text(f: P.() -> Unit) {
-            add(P(classes = Bootstrap { +cardText }).apply(f))
-        }
+    fun text(f: P.() -> Unit) {
+        body.add(P { design("card.text"); f() })
     }
 }

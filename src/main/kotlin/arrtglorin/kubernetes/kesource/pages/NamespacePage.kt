@@ -37,14 +37,12 @@ object NamespacePage : Page {
     override fun Container.render() {
         bsCard {
             addCssClass(Bootstrap.Margin.mt4.name)
-            body {
-                title {
-                    content = Messages.Pages.Namespace.title.tr()
-                }
-                text {
-                    rich = true
-                    content = Messages.Pages.Namespace.description.tr()
-                }
+            title {
+                content = Messages.Pages.Namespace.title.tr()
+            }
+            text {
+                rich = true
+                content = Messages.Pages.Namespace.description.tr()
             }
         }
         namespaceForm()

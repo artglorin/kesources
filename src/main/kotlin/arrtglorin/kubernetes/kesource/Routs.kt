@@ -68,23 +68,21 @@ fun initRouting() {
                     "not found %s",
                     routing.getCurrentLocation().url
                 )
-                body {
-                    title {
-                        content = "Page not found ${routing.getCurrentLocation().url}"
-                    }
-                    text {
-                        link(
-                            label = "Return home",
-                            classes = Bootstrap { +btn; +btnPrimary; },
-                            url = "/"
-                        )
-                        div(
-                            content = "Go back",
-                            classes = Bootstrap { +btn; +btnPrimary; },
-                        ) {
-                            onClick {
-                                window.history.back()
-                            }
+                title {
+                    content = "Page not found ${routing.getCurrentLocation().url}"
+                }
+                text {
+                    link(
+                        label = "Return home",
+                        classes = Bootstrap { +btn; +btnPrimary; },
+                        url = "/"
+                    )
+                    div(
+                        content = "Go back",
+                        classes = Bootstrap { +btn; +btnPrimary; },
+                    ) {
+                        onClick {
+                            window.history.back()
                         }
                     }
                 }

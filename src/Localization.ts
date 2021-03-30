@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
-import * as loc from './i18n/en-EN/hello.json'
-
-export const defaultLocale = { locale: loc };
-
-export const LocaleContext = React.createContext(defaultLocale)
+import { useSelector } from 'react-redux';
+import { currentLocale } from './states/locale-state';
 
 export function useTranslate(key: string): string {
-    let cursor = useContext(LocaleContext).locale as any
-    console.log("translate", key)
+    const translates = useSelector(currentLocale).translates
+    console.debug("translate", translates)
     const keys = key.split(".")
-    let value: any | null = cursor["default"]
+    let value: any | null = translates
     for (const key1 of keys) {
-        console.log("key", key1)
-        console.log("cursor", value )
+        console.debug("key", key1)
+        console.debug("cursor", value)
         value = value[key1]
-        console.log("value", value)
+        console.debug("value", value)
         if (value == null) {
             break
         }

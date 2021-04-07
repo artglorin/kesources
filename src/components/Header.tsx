@@ -1,23 +1,25 @@
 import { FC } from 'react';
-import { Container, Form, Nav, Navbar } from 'react-bootstrap';
-import { useTranslate } from '../Localization';
-import { LocaleSelector } from './LocaleSelector';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useArg } from '../page/UsePage';
 
 export const Header: FC = (): JSX.Element => {
-    const resources = useTranslate('resources')
-    const database = useTranslate('database')
-    const appName = useTranslate("appName")
+    let dbLink
+    if (useArg('withDB')) {
+        dbLink = (
+            <Nav.Link href={'#database'}>База данных</Nav.Link>
+        )
+    }
     return (
         <Container className={"bg-primary text-white"}>
             <Navbar expand="lg" variant='dark'>
-                <Navbar.Brand href="#home">{appName}</Navbar.Brand>
+                <Navbar.Brand href="#">Kesource</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#resources">{resources}</Nav.Link>
-                    <Nav.Link href="#database">{database}</Nav.Link>
+                    <Nav.Link href="#resources">Ресурсы</Nav.Link>
+                    {dbLink}
                 </Nav>
-                <Nav className={"position-absolute  end-0"}>
-                    <LocaleSelector/>
-                </Nav>
+                {/*<Nav className={"position-absolute  end-0"}>*/}
+                {/*    <LocaleSelector/>*/}
+                {/*</Nav>*/}
             </Navbar>
         </Container>
     );

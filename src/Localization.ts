@@ -1,19 +1,24 @@
 import { useSelector } from 'react-redux';
+import { translatesLog } from './LoggingSettings';
 import { currentLocale } from './states/locale-state';
 
-export function useTranslate(key: string): string {
-    const translates = useSelector(currentLocale).translates
-    console.debug("translate", translates)
+export function useTranslate(key: string): any {
+    return translate(key, useSelector(currentLocale).translates)
+}
+
+export function translate(key: string, translates: any): any {
+    translatesLog.debug(`translate by key = ${key}`)
+    translatesLog.trace(`translations: ${translates}`)
     const keys = key.split(".")
     let value: any | null = translates
     for (const key1 of keys) {
-        console.debug("key", key1)
-        console.debug("cursor", value)
+        translatesLog.trace(`key: ${key}, cursor: ${value}`)
         value = value[key1]
-        console.debug("value", value)
+        translatesLog.trace(`translate: ${value}`)
         if (value == null) {
             break
         }
     }
+    translatesLog.debug(`translation result = ${value}`)
     return value ?? "undefined"
 }

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import enTranslates from '../i18n/en-EN/hello.json'
-import ruTranslates from '../i18n/ru-RU/tr.json'
+import * as ruTranslates from '../i18n/ru-RU/tr'
 import { RootState } from './root-state'
 
 export interface Language {
@@ -17,7 +17,7 @@ export interface LocaleState {
 const ruLang: Language = {
     title: "Русский",
     locale: "ru-RU",
-    translates: ruTranslates
+    translates: ruTranslates.default
 }
 
 const enLang: Language = {

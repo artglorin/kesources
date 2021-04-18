@@ -13,13 +13,14 @@ const ComponentNotDefined: FC = (): JSX.Element => {
 }
 
 export function useComponent(componentId: string, context: any = null): FC {
+
     switch (componentId) {
         case "header":
             return Header
         case 'resourceList':
             return ResourcesList;
     }
-    context = context ? context : {};
+    context = context ?? {};
     context['componentId'] = componentId;
     return () => <ArgsContext.Provider value={context}>
         <ComponentNotDefined/>

@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import localeReducer from './locale-state'
 
 export interface AppState {
-    locale: string
+    locale: string,
+    withDb: boolean
 }
 
 export const RootStore = configureStore({
     reducer: {
-        locale: localeReducer
+        locale: localeReducer,
     }
 })
 

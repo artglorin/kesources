@@ -3,7 +3,11 @@ import { translatesLog } from './LoggingSettings';
 import { currentLocale } from './states/locale-state';
 
 export function useTranslate(key: string): any {
-    return translate(key, useSelector(currentLocale).translates)
+    let result: any = translate(key, useSelector(currentLocale).translates);
+    if (result instanceof Function) {
+        result = result()
+    }
+    return result
 }
 
 export function translate(key: string, translates: any): any {
